@@ -31,7 +31,7 @@ arguments = vars(argument_parser.parse_args())
 # ---------------------------------------------------------------------------- #
 # Load the Imputted Image from Command Line
 # ---------------------------------------------------------------------------- #
-image = cv2.imread(args["image"])
+image = cv2.imread(arguments["image"])
 
 # ---------------------------------------------------------------------------- #
 # Find the QR Codes in the Image and Decode Each QR Code
@@ -47,7 +47,7 @@ for qr_code in qrcodes:
     cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
     #Need QR Decoded as a STRING
-    qrData = qr_code.decode("utf-8")
+    qrData = qr_code.data.decode("utf-8")
     qrType = qr_code.type
 
     #Draw QR Code Data and Type on the Image
@@ -57,6 +57,6 @@ for qr_code in qrcodes:
     #Print QR Code Type and Data to Terminal
     print("[INFO] Found {} QR Code: {}".format(qrType, qrData))
 
-    #Show Output Image
-    cv2.imshow("QR Image", image)
-    cv2.waitKey(0)
+#Show Output Image
+cv2.imshow("QR Image", image)
+cv2.waitKey(0)
