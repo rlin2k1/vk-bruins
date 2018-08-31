@@ -70,6 +70,10 @@ while True:
         text = "{} ({})".format(qrData, qrType)
         cv2.putText(frame, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
+        #Print QR Code Type and Data to Terminal
+        #Uncomment if You Don;t Want the Terminal to Be Spammed!
+        print("[INFO] Found {} QR Code: {}".format(qrType, qrData))
+        
         #Write TimeStamp + QR_Code to CSV (Update SET)
         if qrData not in found:
             csv.write("{},{}\n". format(datetime.datetime.now(), qrData))
