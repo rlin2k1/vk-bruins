@@ -40,6 +40,8 @@ vs = VideoStream(usePiCamera=True).start()
 time.sleep(2.0) #Allows Camera to Warm Up
 
 #Can Save QR Codes in a SQL Database, Send it to Server, Upload to Cloud, Send an Email or Text Message
+csv = open(arguments["output"], "w")
+found = set()
 
 # ---------------------------------------------------------------------------- #
 # Loop Over Each Frame in the Video Stream
@@ -52,19 +54,21 @@ while True:
     # Find the QR Codes in the Image and Decode Each QR Code
     qrcodes = pyzbar.decode(frame)
 
+    print("REACHED!")
+
     # Loop Over Detected QR Codes
     for qr_code in qrcodes:
         #Extract the Bounding Box Location of the QR Code and Draw the Bounding Box Surrounding the QR Code on the Image
         (x, y, w, h) = qr_code.rect
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
         #Need QR Decoded as a STRING
-        qrData = qr_code.decode("utf-8")
+        qrData = qr_code.data.decode("utf-8")
         qrType = qr_code.type
 
         #Draw QR Code Data and Type on the Image
         text = "{} ({})".format(qrData, qrType)
-        cv2.putText(image, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+        cv2.putText(frame, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
         #Write TimeStamp + QR_Code to CSV (Update SET)
         if qrData not in found:
@@ -73,11 +77,11 @@ while True:
             found.add(qrData)
 
         #Show Output FRAME
-        cv2.imshow("QR Frame", frame)
-        key = cv2.waitKey(1) & 0xFF
+    cv2.imshow("QR Frame", frame)
+    key = cv2.waitKey(1) & 0xFF
 
-        if key == ord('q'):
-            break
+    if key == ord('q'):
+        break
 
 # ---------------------------------------------------------------------------- #
 # CleanUp
