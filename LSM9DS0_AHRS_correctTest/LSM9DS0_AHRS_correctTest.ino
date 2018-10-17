@@ -89,7 +89,6 @@ Distributed as-is; no warranty is given.
 // sketch, before including the SFE_LSM9DS0 library.
 #include <SPI.h> // Included for SFE_LSM9DS0 library
 #include <Wire.h>
-#include <String.h>
 #include "SFE_LSM9DS0.h"
 //#include "Arduino.h"
 //#include <Adafruit_GFX.h>
@@ -166,13 +165,11 @@ float temperature;
 void setup()
 {
   Serial.begin(38400); // Start serial at 38400 bps
-  Wire.begin();
  
   // Set up interrupt pins as inputs:
   pinMode(INT1XM, INPUT);
   pinMode(INT2XM, INPUT);
   pinMode(DRDYG,  INPUT);
-Serial.print("HHHH\n");
   // begin() returns a 16-bit value which includes both the gyro 
   // and accelerometers WHO_AM_I response. You can check this to
   // make sure communication was successful.
@@ -218,7 +215,7 @@ Serial.print("HHHH\n");
 void loop()
 {
 
-  /*
+  
   if(digitalRead(DRDYG)) {  // When new gyro data is ready
   dof.readGyro();           // Read raw gyro data
     gx = dof.calcGyro(dof.gx) - gbias[0];   // Convert to degrees per seconds, remove gyro biases
@@ -275,12 +272,6 @@ void loop()
     yaw   -= 11; // Declination at Danville, California is 13 degrees 48 minutes and 47 seconds on 2014-04-04
     roll  *= 180.0f / PI;
 
-    Wire.beginTransmission(9); // transmit to device #9
-    Wire.write(x);              // sends roll 
-    Wire.endTransmission();    // stop transmitting
-    x++; // Increment x
-    if (x > 5) x = 0; // `reset x once it gets 6
-
     Serial.print(roll); Serial.print("\t"); Serial.print(pitch); Serial.print("\t"); Serial.println(yaw);
 
   
@@ -304,13 +295,7 @@ void loop()
     // The 3.3 V 8 MHz Pro Mini is doing pretty well!
 
     count = millis();
-    }*/
-
-  Wire.beginTransmission(9); // transmit to device #9
-  Wire.write(x);              // sends x 
-  Wire.endTransmission();    // stop transmitting
-  x++; // Increment x
-  if (x > 5) x = 0; // `reset x once it gets 6
+    }
 }
 
 
