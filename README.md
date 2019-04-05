@@ -1,5 +1,5 @@
 # vk-bruins
-Von Karman Hackathon - Autonomous Rover<br/>
+Von Karman Hackathon Project - Autonomous Rover<br/>
 <br/>
 To Start Stream: (https://altax.net/blog/low-latency-raspberry-pi-video-transmission/)<br/>
 ON MAC (I don't know about windows) in your current directory: 'netcat -l -p 5000 | mplayer -fps 60 -cache 1024 -'<br/>
