@@ -1,6 +1,8 @@
 # vk-bruins
-Von Karman Hackathon Project - Autonomous Rover<br/>
+Von Karman Hackathon Project - Rescue Rover<br/>
 <br/>
+Python | OpenCV | Pyzbar | Sockets | Raspberry Pi<br><br>
+FIRST PLACE: Software Lead for a Mars Rescue Rover. Using Raspberry Pis to enable IR Cameras for QR Decoder. Video Streams from Pi to PC with Object Detection and Dimensions using Sockets / OpenCV. Terrain Map of QR Codes.<br><br>
 To Start Stream: (https://altax.net/blog/low-latency-raspberry-pi-video-transmission/)<br/>
 ON MAC (I don't know about windows) in your current directory: 'netcat -l -p 5000 | mplayer -fps 60 -cache 1024 -'<br/>
 
